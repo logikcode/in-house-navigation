@@ -39,6 +39,8 @@ public class MobileStationServiceImpl implements MobileStationService{
         }
         MobileStationResponseDto response = new MobileStationResponseDto();
         response.setX(mobileStation.get().getLastKnownX());
+        response.setY(mobileStation.get().getLastKnownY());
+        response.setMobileId(mobileStation.get().getUuid());
         return response;
     }
 

@@ -1,9 +1,8 @@
 package com.navigation.basestationservice.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import lombok.*;
 
     @Getter
@@ -16,9 +15,14 @@ import lombok.*;
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String uuid;
+    @NotBlank(message = "Name must not be empty")
+    @Size(min = 3, max = 20)
     private String name;
+    @Column(length = 20, nullable = false)
     private float x;
+    @Column(length = 20, nullable = false)
     private float y;
+    @Column(length = 20, nullable = false)
     private float detectionRadiusInMeters;
 
 }

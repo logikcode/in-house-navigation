@@ -14,7 +14,8 @@ import lombok.*;
     public class BaseStation {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private String id;
+    private Long id;
+    private String uuid;
     private String name;
     private float x;
     private float y;

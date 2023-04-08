@@ -22,7 +22,7 @@ public class BaseStationController {
     }
 
     @GetMapping("/get")
-    public ResponseEntity<BaseStationResponseDto> getBaseStation(@RequestParam("id") String id){
+    public ResponseEntity<BaseStationResponseDto> getBaseStation(@RequestParam("id") Long id){
         return ResponseEntity.ok(baseStationService.getBaseStation(id));
     }
 

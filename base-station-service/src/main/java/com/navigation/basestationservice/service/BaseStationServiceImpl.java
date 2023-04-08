@@ -27,13 +27,13 @@ public class BaseStationServiceImpl implements BaseStationService{
         baseStation.setX(baseStationRequestDto.getX());
         baseStation.setY(baseStationRequestDto.getY());
         baseStation.setName(baseStationRequestDto.getName());
-        baseStation.setId(UUID.randomUUID().toString());
+        baseStation.setUuid(UUID.randomUUID().toString());
 
         return baseStationRepository.save(baseStation);
     }
 
     @Override
-    public BaseStationResponseDto getBaseStation(String id) {
+    public BaseStationResponseDto getBaseStation(Long id) {
        Optional<BaseStation> baseStation = baseStationRepository.findById(id);
        if (baseStation.isEmpty()){
            throw new EntityNotFoundException("mobile station with id "+id+" not found");

@@ -10,7 +10,7 @@ import java.util.List;
 public interface MobileStationService {
     MobileStation createBaseStation(MobileStationRequestDto mobileStationRepository);
 
-    MobileStationResponseDto getMobileStation(String id);
+    MobileStationResponseDto getMobileStation(Long id);
 
     List<MobileStation> retrieveAllStationsInDB();
 }

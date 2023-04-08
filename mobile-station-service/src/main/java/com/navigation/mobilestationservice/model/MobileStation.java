@@ -1,8 +1,6 @@
 package com.navigation.mobilestationservice.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,12 +18,14 @@ import java.time.LocalDateTime;
 
 public class MobileStation {
     @Id
-    private String id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+    private String uuid;
     private float lastKnownX;
-    private float getLastKnownY;
-    private float error_radius;
-    private int error_code;
-    private String error_description;
+    private float lastKnownY;
+//    private float error_radius;
+//    private int error_code;
+//    private String error_description;
 
     @CreationTimestamp
     private LocalDateTime createdDate;

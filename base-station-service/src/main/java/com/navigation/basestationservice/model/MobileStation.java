@@ -1,5 +1,7 @@
 package com.navigation.basestationservice.model;
 
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
@@ -13,7 +15,8 @@ import java.time.LocalDateTime;
 @ToString
 public class MobileStation {
     @Id
-    private String id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
     private float lastKnownX;
     private float getLastKnownY;
     private float error_radius;

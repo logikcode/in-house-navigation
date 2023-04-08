@@ -22,7 +22,7 @@ public class MobileStationController {
     }
 
     @GetMapping("/location/{uuid}")
-    public ResponseEntity<MobileStationResponseDto> getMobileStation(@PathVariable("uuid") String id){
+    public ResponseEntity<MobileStationResponseDto> getMobileStation(@PathVariable("uuid") Long id){
         return ResponseEntity.ok(mobileStationService.getMobileStation(id));
     }
     @GetMapping("/all")

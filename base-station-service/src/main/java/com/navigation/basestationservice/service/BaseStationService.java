@@ -7,5 +7,5 @@ import com.navigation.basestationservice.model.response.BaseStationResponseDto;
 
 public interface BaseStationService {
      BaseStation createBaseStation(BaseStationRequestDto baseStationRequestDto);
-     BaseStationResponseDto getBaseStation(String uuid);
+     BaseStationResponseDto getBaseStation(Long uuid);
 }

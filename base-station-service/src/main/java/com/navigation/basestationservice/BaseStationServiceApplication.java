@@ -30,12 +30,12 @@ public class BaseStationServiceApplication implements CommandLineRunner {
     private void loadBaseStationsToDB() {
         Random random = new Random(100);
         String NAME = "Base Station ";
-        float radius = 63;
+        float radius = 45;
 
         for (int i = 1; i < 100; i++) {
             String uuid = UUID.randomUUID().toString();
-            float xValue = random.nextFloat(1, 100);
-            float yValue = random.nextFloat(1, 100);
+            float xValue = random.nextFloat(120 );
+            float yValue = random.nextFloat(120);
             log.info("XVALUE -> {}, YVALUE -> {}", xValue, yValue);
 
             BaseStation baseStation = new BaseStation();
@@ -48,6 +48,13 @@ public class BaseStationServiceApplication implements CommandLineRunner {
             repository.save(baseStation);
 
         }
+
+    }
+
+    private float computeDetectionPoint(float x, float y){
+        float r = x - y;
+       return  (float)Math.sqrt(r * r);
+
 
     }
 }

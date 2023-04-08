@@ -23,9 +23,6 @@ public class MobileStation {
     private String uuid;
     private float lastKnownX;
     private float lastKnownY;
-//    private float error_radius;
-//    private int error_code;
-//    private String error_description;
 
     @CreationTimestamp
     private LocalDateTime createdDate;

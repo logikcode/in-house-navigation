@@ -10,6 +10,6 @@ import java.util.Map;
 @NoArgsConstructor
 @Builder
 public class BaseStationResponseDto {
-    private String base_station;
+    private String baseStationId;
     private List<Map<String,Object>> reports;
 }

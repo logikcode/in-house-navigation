@@ -8,16 +8,16 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 
 import java.time.LocalDateTime;
-import java.util.LinkedHashMap;
+import java.util.HashMap;
 import java.util.Map;
 
 @ControllerAdvice
 public class ExceptionController {
 
     @ExceptionHandler(EntityNotFoundException.class)
-    public ResponseEntity<Object> handleCityNotFoundException(EntityNotFoundException ex, WebRequest request) {
+    public ResponseEntity<Object> handleMobileStationNotFoundException(EntityNotFoundException ex, WebRequest request) {
 
-        Map<String, Object> body = new LinkedHashMap<>();
+        Map<String, Object> body = new HashMap<>();
         body.put("timestamp", LocalDateTime.now());
         body.put("message", ex.getMessage());
 

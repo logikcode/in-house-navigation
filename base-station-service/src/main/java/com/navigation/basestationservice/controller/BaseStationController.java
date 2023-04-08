@@ -5,11 +5,8 @@ import com.navigation.basestationservice.model.request.BaseStationRequestDto;
 import com.navigation.basestationservice.model.response.BaseStationResponseDto;
 import com.navigation.basestationservice.service.BaseStationService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/base_station")

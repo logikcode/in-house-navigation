@@ -38,12 +38,7 @@ public class MobileStationServiceImpl implements MobileStationService{
             throw new EntityNotFoundException("mobile station with id "+id+" not found");
         }
         MobileStationResponseDto response = new MobileStationResponseDto();
-//        response.setError_code(mobileStation.get().getError_code());
-       // response.setY(mobileStation.get().getGetLastKnownY());
         response.setX(mobileStation.get().getLastKnownX());
-//        response.setError_radius(mobileStation.get().getError_radius());
-//        response.setError_description(mobileStation.get().getError_description());
-
         return response;
     }
 

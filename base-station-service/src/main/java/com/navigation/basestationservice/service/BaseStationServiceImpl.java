@@ -1,6 +1,8 @@
 package com.navigation.basestationservice.service;
 
-import com.navigation.basestationservice.exceptionhandler.exceptions.EntityNotFoundException;
+import com.navigation.basestationservice.exceptionhandler.exceptions.InvalidParameterException;
+import com.navigation.basestationservice.exceptionhandler.exceptions.NoBaseStationException;
+import com.navigation.basestationservice.exceptionhandler.exceptions.NoMobileStationInRadiusException;
 import com.navigation.basestationservice.model.BaseStation;
 import com.navigation.basestationservice.model.MobileStation;
 import com.navigation.basestationservice.model.request.BaseStationRequestDto;
@@ -34,18 +36,22 @@ public class BaseStationServiceImpl implements BaseStationService{
 
     @Override
     public BaseStationResponseDto getBaseStation(Long id) {
+        if (id == null){
+            throw new InvalidParameterException();
+        }
        Optional<BaseStation> baseStation = baseStationRepository.findById(id);
+
        if (baseStation.isEmpty()){
-           throw new EntityNotFoundException("mobile station with id "+id+" not found");
+           throw new NoBaseStationException("mobile station with id "+id+" not found");
        }
 
-       List<Map<String,Object>> mobileStations = getMobileStations(baseStation.get().getX(), baseStation.get().getX(),baseStation.get().getX());
+       List<Map<String,Object>> mobileStations = getMobileStations(baseStation.get().getX(), baseStation.get().getY() ,baseStation.get().getDetectionRadiusInMeters());
        if(mobileStations.isEmpty()){
-           throw new EntityNotFoundException("no mobile station within the specified radius "+id+"");
+           throw new NoMobileStationInRadiusException();
        }
        BaseStationResponseDto responseDto = new BaseStationResponseDto();
        responseDto.setReports(mobileStations);
-       responseDto.setBase_station(baseStation.get().getName());
+       responseDto.setBaseStationId(baseStation.get().getUuid());
 
        return responseDto;
     }
@@ -55,6 +61,7 @@ public class BaseStationServiceImpl implements BaseStationService{
     private List<Map<String,Object>> getMobileStations(float x, float y, float detectionRadiusInMeters) {
 
         List<MobileStation> mobileStations = retrieveMobileStations();
+        System.out.println("DONE RETRIEVING ALL MOBILE STATIONS "+ mobileStations.size());
         return computeMobileStationDistance(mobileStations, x, y, detectionRadiusInMeters);
     }
 
@@ -72,21 +79,24 @@ public class BaseStationServiceImpl implements BaseStationService{
        return mobileStationList;
     }
 
-    private List<Map<String, Object>> computeMobileStationDistance(List<MobileStation> mobileStations, float x, float y, float detectionRadiusInMeters){
+    private List<Map<String, Object>> computeMobileStationDistance(List<MobileStation> mobileStations,
+                                                                   float baseStationXPoint, float baseStationYPoint,
+                                                                   float detectionRadiusInMeters){
 
         List<Map<String, Object>> response = new ArrayList<>();
 
         for(MobileStation mobileStation: mobileStations) {
-            Map<String,Object> res = new HashMap<>();
+            Map<String,Object> report = new HashMap<>();
 
-            double distance = Math.sqrt(Math.pow(x - mobileStation.getLastKnownX(), 2)
-                    - Math.pow(y - mobileStation.getGetLastKnownY(), 2));
+            double distance = Math.sqrt(Math.pow( mobileStation.getLastKnownX()- baseStationXPoint, 2)
+                    + Math.pow(mobileStation.getGetLastKnownY() - baseStationYPoint, 2));
+
             if(distance <= detectionRadiusInMeters) {
-                res.put("mobile_station_id", mobileStation.getId());
-                res.put("distance", distance);
-                res.put("timeStamp", mobileStation.getCreatedDate());
+                report.put("mobile_station_id", mobileStation.getId());
+                report.put("distance", distance);
+                report.put("timeStamp", mobileStation.getCreatedDate());
 
-                response.add(res);
+                response.add(report);
             }
 
         }

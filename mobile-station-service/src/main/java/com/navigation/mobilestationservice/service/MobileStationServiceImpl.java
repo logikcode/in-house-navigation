@@ -9,6 +9,7 @@ import com.navigation.mobilestationservice.repository.MobileStationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -44,5 +45,10 @@ public class MobileStationServiceImpl implements MobileStationService{
         response.setError_description(mobileStation.get().getError_description());
 
         return response;
+    }
+
+    @Override
+    public List<MobileStation> retrieveAllStationsInDB() {
+        return mobileStationRepository.findAll();
     }
 }

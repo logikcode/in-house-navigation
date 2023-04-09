@@ -9,6 +9,7 @@ import com.navigation.mobilestationservice.repository.MobileStationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -22,12 +23,9 @@ public class MobileStationServiceImpl implements MobileStationService{
     public MobileStation createBaseStation(MobileStationRequestDto mobileStationRequestDto) {
         MobileStation mobileStation = new MobileStation();
         mobileStation.setUuid(UUID.randomUUID().toString());
-//        mobileStation.setError_radius(mobileStationRequestDto.getError_radius());
-//        mobileStation.setError_description(mobileStationRequestDto.getError_description());
-//        mobileStation.setError_code(mobileStationRequestDto.getError_code());
-//        mobileStation.setGetLastKnownY(mobileStationRequestDto.getY());
+        mobileStation.setLastKnownY(mobileStationRequestDto.getY());
         mobileStation.setLastKnownX(mobileStationRequestDto.getX());
-
+        mobileStation.setCreatedDate(LocalDateTime.now());
         return mobileStationRepository.save(mobileStation);
     }
 

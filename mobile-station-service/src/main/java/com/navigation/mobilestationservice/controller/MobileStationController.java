@@ -16,7 +16,7 @@ public class MobileStationController {
 
     private final MobileStationService mobileStationService;
 
-    @PostMapping()
+    @PostMapping("/create")
     public ResponseEntity<MobileStation> createMobileStation(@RequestBody MobileStationRequestDto mobileStationRequestDto){
         return ResponseEntity.ok(mobileStationService.createBaseStation(mobileStationRequestDto));
     }

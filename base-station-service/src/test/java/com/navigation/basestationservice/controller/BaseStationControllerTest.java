@@ -1,17 +1,18 @@
 package com.navigation.basestationservice.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.navigation.basestationservice.exceptionhandler.exceptions.InvalidParameterException;
 import com.navigation.basestationservice.model.BaseStation;
 import com.navigation.basestationservice.repository.BaseStationRepository;
 import com.navigation.basestationservice.service.BaseStationService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.web.servlet.function.ServerResponse;
 
 import java.util.Random;
 import java.util.UUID;
@@ -86,6 +87,21 @@ class BaseStationControllerTest {
                         .get(uri).contentType("application/json")
                         .queryParam("id", String.valueOf(id)))
                 .andExpect(status().isOk());
+
+    }
+
+    @Test
+    void testGetListShouldReturnNoContent() throws Exception {
+        String uri = END_POINT_PATH + "get";
+        Long id = 200L;
+        Mockito.when(baseStationService.getBaseStation(id)).thenThrow(InvalidParameterException.class);
+        mockMvc.perform(MockMvcRequestBuilders
+                        .get(uri).contentType("application/json")
+                        .queryParam("id", String.valueOf(id)))
+                .andExpect(status().isNotFound());
+
+        //Mockito.verify(baseStationService, Mockito.times(1));
+
 
     }
 

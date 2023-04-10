@@ -19,21 +19,21 @@ import java.util.List;
 public class MobileStationController {
 
     private final MobileStationService mobileStationService;
-
-//    @Operation(description = "Create a Mobile Station",
-//            responses = {
-//                    @ApiResponse(responseCode = "400", ref = "badRequestAPI"),
-//                    @ApiResponse(responseCode = "500", ref = "internalServerResponse"),
-//                    @ApiResponse(
-//                            responseCode = "201",
-//                            description = "Successfully Created Mobile Station",
-//                            content = @Content(mediaType = "application/json",
-//                                    examples = {
-//                                            @ExampleObject(value = "{\"code\": 201, \"status: \"Created\", \" message\": \" Successfully created a Mobile  Station\"}")
-//                                    })
-//                    )
-//            })
     @PostMapping("/create")
+
+    @Operation(description = "Create a Mobile Station",
+            responses = {
+                    @ApiResponse(responseCode = "400", ref = "badRequestAPI"),
+                    @ApiResponse(responseCode = "500", ref = "internalServerResponse"),
+                    @ApiResponse(
+                            responseCode = "201",
+                            description = "Successfully Created Mobile Station",
+                            content = @Content(mediaType = "application/json",
+                                    examples = {
+                                            @ExampleObject(value = "{\"code\": 201, \"status: \"Created\", \" message\": \" Successfully created a Mobile  Station\"}")
+                                    })
+                    )
+            })
     public ResponseEntity<MobileStation> createMobileStation(@RequestBody MobileStationRequestDto mobileStationRequestDto){
         return ResponseEntity.ok(mobileStationService.createBaseStation(mobileStationRequestDto));
     }

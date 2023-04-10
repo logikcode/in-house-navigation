@@ -3,6 +3,7 @@ package com.navigation.basestationservice.service;
 import com.navigation.basestationservice.exceptionhandler.exceptions.InvalidParameterException;
 import com.navigation.basestationservice.exceptionhandler.exceptions.NoBaseStationException;
 import com.navigation.basestationservice.exceptionhandler.exceptions.NoMobileStationInRadiusException;
+import com.navigation.basestationservice.exceptionhandler.exceptions.ServiceDownException;
 import com.navigation.basestationservice.model.BaseStation;
 import com.navigation.basestationservice.model.MobileStation;
 import com.navigation.basestationservice.model.request.BaseStationRequestDto;
@@ -68,11 +69,16 @@ public class BaseStationServiceImpl implements BaseStationService{
     public List<MobileStation> retrieveMobileStations(){
         List<MobileStation> mobileStationList = new ArrayList<>();
     MobileStation[] response;
-       response = webClietBuilder.build().get()
+    try {
+        response = webClietBuilder.build().get()
                 .uri("http://mobile-station-service/api/v1/mobile_station/all")
                 .retrieve()
                 .bodyToMono(MobileStation[].class)
                 .block();
+    }catch (Exception ex){
+
+        throw new ServiceDownException();
+    }
 
        assert response != null;
        mobileStationList = Arrays.asList(response);

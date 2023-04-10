@@ -16,7 +16,7 @@ import org.springframework.http.MediaType;
 public class SpringDocConfiguration {
 
     @Bean()
-    public OpenAPI baseOpenApi(){
+    public OpenAPI mobileOpenApiConfig(){
 
         Content content = new Content();
         io.swagger.v3.oas.models.media.MediaType mediaType = new io.swagger.v3.oas.models.media.MediaType();

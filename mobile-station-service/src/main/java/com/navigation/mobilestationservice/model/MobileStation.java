@@ -1,5 +1,6 @@
 package com.navigation.mobilestationservice.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -21,9 +22,11 @@ public class MobileStation {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String uuid;
+    @JsonProperty("last_known_x")
     private float lastKnownX;
+    @JsonProperty("last_known_y")
     private float lastKnownY;
-
+    @JsonProperty("created_date")
     @CreationTimestamp
     private LocalDateTime createdDate;
 }

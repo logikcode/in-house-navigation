@@ -48,6 +48,7 @@ public class BaseStationServiceApplication implements CommandLineRunner {
             baseStation.setY(yValue);
             baseStation.setDetectionRadiusInMeters(radius);
 
+
             repository.save(baseStation);
 
         }

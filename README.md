@@ -53,8 +53,8 @@ The system's data is persisted in an in-memory datastore.
 
 ### Accessing the Service Endpoints
 - The services Endpoint can be tested via swagger UI:
-    base-station-service: http://localhost:8081/swagger-ui/index.html#
-    mobile-station-service: http://localhost:8082/swagger-ui/index.html#
+    - base-station-service: http://localhost:8081/swagger-ui/index.html#
+    - mobile-station-service: http://localhost:8082/swagger-ui/index.html#
     
 
 

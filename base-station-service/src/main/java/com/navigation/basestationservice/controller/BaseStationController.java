@@ -5,10 +5,7 @@ import com.navigation.basestationservice.model.request.BaseStationRequestDto;
 import com.navigation.basestationservice.model.response.BaseStationResponseDto;
 import com.navigation.basestationservice.service.BaseStationService;
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.media.Content;
-import io.swagger.v3.oas.annotations.media.ExampleObject;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -22,16 +19,10 @@ public class BaseStationController {
 
    @Operation(description = "Create a Base Station",
             responses = {
-            @ApiResponse(responseCode = "400", ref = "badRequestAPI"),
-            @ApiResponse(responseCode = "500", ref = "internalServerResponse"),
-            @ApiResponse(
-                    responseCode = "201",
-                    description = "Successfully Created Base Station",
-                    content = @Content(mediaType = "application/json",
-                            examples = {
-                            @ExampleObject(value = "{\"code\": 201, \"status: \"Created\", \" message\": \" Successfully created a Base  Station\"}")
-                    })
-            )
+
+            @ApiResponse(responseCode = "400", ref = "Bad Request"),
+            @ApiResponse(responseCode = "500", ref = "Internal Server"),
+            @ApiResponse(responseCode = "201", ref = "Success")
     })
     @PostMapping("/create")
     public ResponseEntity<BaseStation> createBaseStation(@RequestBody BaseStationRequestDto baseStationRequestDto){
@@ -39,6 +30,13 @@ public class BaseStationController {
     }
 
     @GetMapping("/get")
+    @Operation(description = "Retrieving a Base Station",
+            responses = {
+
+                    @ApiResponse(responseCode = "400", ref = "Bad Request"),
+                    @ApiResponse(responseCode = "500", ref = "Internal Server"),
+                    @ApiResponse(responseCode = "200", ref = "Success")
+            })
     public ResponseEntity<BaseStationResponseDto> getBaseStation(@RequestParam("id") Long id){
         return ResponseEntity.ok(baseStationService.getBaseStation(id));
     }

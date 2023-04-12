@@ -1,5 +1,6 @@
 package com.navigation.basestationservice.config;
 
+import com.navigation.basestationservice.util.ReadJsonFileToObject;
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.models.Components;
 import io.swagger.v3.oas.models.OpenAPI;
@@ -11,41 +12,48 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.MediaType;
 
+import java.io.IOException;
+
 @OpenAPIDefinition
 @Configuration
 public class SpringDocConfiguration {
-
+    private ReadJsonFileToObject readJsonFileToObject = new ReadJsonFileToObject();
     @Bean()
-    public OpenAPI baseOpenApiConfig(){
+    public OpenAPI baseOpenApiConfig()  {
 
         Content content = new Content();
         io.swagger.v3.oas.models.media.MediaType mediaType = new io.swagger.v3.oas.models.media.MediaType();
 
-        mediaType.addExamples("Default", new Example().value("{\"code\" : 400, \"status: Bad Request \", \"message : \"Bad Request Sent\" }"));
+
+        mediaType.addExamples("Default", new Example().value(readJsonFileToObject.read()
+                .get("Bad Request").toString()));
+
         content.addMediaType(MediaType.APPLICATION_JSON.toString(), mediaType);
 
-        ApiResponse badRequestAPI = new ApiResponse().content(content);
+        ApiResponse badRequestAPI = new ApiResponse().content(content).description("Bad Request");
 
 
         Content forInternalServerError = new Content();
         io.swagger.v3.oas.models.media.MediaType mediaTypeInternalServer = new io.swagger.v3.oas.models.media.MediaType();
 
-        mediaTypeInternalServer.addExamples("Default", new Example().value("{\"code\" : 500, \"status: Internal Server \", \"message : \"Internal Server Error Occurred\" }"));
+        mediaTypeInternalServer.addExamples("Default", new Example().value(readJsonFileToObject.read()
+                .get("Internal Server").toString()));
         forInternalServerError.addMediaType(MediaType.APPLICATION_JSON.toString(), mediaTypeInternalServer);
 
-        ApiResponse internalServerResponse = new ApiResponse().content(forInternalServerError);
+        ApiResponse internalServerResponse = new ApiResponse().content(forInternalServerError).description("Internal Server Error");
 
 
         Content successApiContent = new Content();
         io.swagger.v3.oas.models.media.MediaType successApiMediaType = new io.swagger.v3.oas.models.media.MediaType();
 
-        successApiMediaType.addExamples("Default", new Example().value("{\"code\" : 200, \"status: Successful \", \"message : \"Successful\" }"));
+        successApiMediaType.addExamples("Default", new Example().value(readJsonFileToObject.read()
+                .get("Success").toString()));
         successApiContent.addMediaType(MediaType.APPLICATION_JSON.toString(), successApiMediaType);
 
-        ApiResponse successApiResponse = new ApiResponse().content(successApiContent);
+        ApiResponse successApiResponse = new ApiResponse().content(successApiContent).description("Successful");
 
         Components components = new Components();
-        components.addResponses("success", successApiResponse);
+        components.addResponses("Success", successApiResponse);
         components.addResponses("Bad Request", badRequestAPI);
         components.addResponses("Internal Server", internalServerResponse);
 

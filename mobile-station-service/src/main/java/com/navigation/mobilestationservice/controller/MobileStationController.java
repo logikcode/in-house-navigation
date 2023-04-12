@@ -23,25 +23,30 @@ public class MobileStationController {
 
     @Operation(description = "Create a Mobile Station",
             responses = {
-                    @ApiResponse(responseCode = "400", ref = "badRequestAPI"),
-                    @ApiResponse(responseCode = "500", ref = "internalServerResponse"),
-                    @ApiResponse(
-                            responseCode = "201",
-                            description = "Successfully Created Mobile Station",
-                            content = @Content(mediaType = "application/json",
-                                    examples = {
-                                            @ExampleObject(value = "{\"code\": 201, \"status: \"Created\", \" message\": \" Successfully created a Mobile  Station\"}")
-                                    })
-                    )
+                    @ApiResponse(responseCode = "400", ref = "Bad Request"),
+                    @ApiResponse(responseCode = "500", ref = "Internal Server"),
+                    @ApiResponse(responseCode = "201", ref = "Success")
             })
     public ResponseEntity<MobileStation> createMobileStation(@RequestBody MobileStationRequestDto mobileStationRequestDto){
         return ResponseEntity.ok(mobileStationService.createBaseStation(mobileStationRequestDto));
     }
 
+    @Operation(description = "Retrieving a Mobile Station",
+            responses = {
+                    @ApiResponse(responseCode = "400", ref = "Bad Request"),
+                    @ApiResponse(responseCode = "500", ref = "Internal Server"),
+                    @ApiResponse(responseCode = "200", ref = "Success")
+            })
     @GetMapping("/location/{uuid}")
     public ResponseEntity<MobileStationResponseDto> getMobileStation(@PathVariable("uuid") Long id){
         return ResponseEntity.ok(mobileStationService.getMobileStation(id));
     }
+    @Operation(description = "Retrieving all Mobile Stations",
+            responses = {
+                    @ApiResponse(responseCode = "400", ref = "Bad Request"),
+                    @ApiResponse(responseCode = "500", ref = "Internal Server"),
+                    @ApiResponse(responseCode = "200", ref = "Success")
+            })
     @GetMapping("/all")
     public List<MobileStation> retrieveStations(){
         return mobileStationService.retrieveAllStationsInDB();

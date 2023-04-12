@@ -1,0 +1,17 @@
+{
+  "Bad Request": {
+    "code": 400,
+    "status": "Bad Request",
+    "message": "Bad Request Sent. Check!"
+  },
+  "Internal Server": {
+    "code": 500,
+    "status": "Server Error",
+    "message": "Server Error Occurred!"
+  },
+  "Success": {
+    "code": 201,
+    "status": "Created",
+    "message": "Successful"
+  }
+}

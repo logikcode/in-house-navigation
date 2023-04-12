@@ -44,9 +44,9 @@ The system's data is persisted in an in-memory datastore.
 - Navigate to project root/module containing the services
 - Launch the program in the following order: Discovery-Service -> Base-Station-Service -> Mobile-Station-Service
 
-- The services Endpoint can be tested via swagger UI:
-    base-station-service: http://localhost:8081/swagger-ui/index.html#
-    mobile-station-service: http://localhost:8082/swagger-ui/index.html#
+- The services Endpoint can be tested via swagger UI or Postman:
+    - base-station-service: http://localhost:8081/swagger-ui/index.html#
+    - mobile-station-service: http://localhost:8082/swagger-ui/index.html#
 
 
 ---

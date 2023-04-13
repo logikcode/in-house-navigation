@@ -28,8 +28,8 @@ public class MobileStationServiceApplication implements CommandLineRunner{
 
     private  void loadMobileStationsToDB(){
         Random random = new Random(100);
-        int max = 60;
-        int min = 1;
+        int max = 100;
+        int min = 40;
 
         for (int i = 1; i < 100; i++){
             String uuid = UUID.randomUUID().toString();

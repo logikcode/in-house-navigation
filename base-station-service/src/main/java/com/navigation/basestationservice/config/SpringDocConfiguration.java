@@ -12,8 +12,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.MediaType;
 
-import java.io.IOException;
-
 @OpenAPIDefinition
 @Configuration
 public class SpringDocConfiguration {

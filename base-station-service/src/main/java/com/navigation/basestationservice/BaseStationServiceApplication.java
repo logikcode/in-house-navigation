@@ -34,7 +34,7 @@ public class BaseStationServiceApplication implements CommandLineRunner {
         int min = 1; // Minimum value of range
         int max = 60; // Maximum value of range
         int UPPER_BOUND = 60;
-        int LOWER_BOUND = 30;
+        int LOWER_BOUND = 50;
 
         Random random = new Random();
         String NAME = "Base Station ";

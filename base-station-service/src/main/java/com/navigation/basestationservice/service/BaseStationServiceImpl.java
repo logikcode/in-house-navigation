@@ -95,7 +95,7 @@ public class BaseStationServiceImpl implements BaseStationService{
             Map<String,Object> report = new HashMap<>();
 
             double distance = Math.sqrt(Math.pow( mobileStation.getLastKnownX()- baseStationXPoint, 2)
-                    + Math.pow(mobileStation.getGetLastKnownY() - baseStationYPoint, 2));
+                    - Math.pow(mobileStation.getGetLastKnownY() - baseStationYPoint, 2));
 
             if(distance <= detectionRadiusInMeters) {
                 report.put("mobile_station_id", mobileStation.getId());

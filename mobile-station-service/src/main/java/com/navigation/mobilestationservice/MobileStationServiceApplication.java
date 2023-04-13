@@ -28,12 +28,14 @@ public class MobileStationServiceApplication implements CommandLineRunner{
 
     private  void loadMobileStationsToDB(){
         Random random = new Random(100);
-
+        int max = 60;
+        int min = 1;
 
         for (int i = 1; i < 100; i++){
             String uuid = UUID.randomUUID().toString();
-            float xValue = random.nextFloat(1, 100);
-            float yValue = random.nextFloat(1, 100);
+            float xValue = (float)Math.floor(Math.random() * (max - min + 1) + min);
+            float yValue = (float)Math.floor(Math.random() * (max - min + 1) + min);
+
             log.info("XVALUE -> {}, YVALUE -> {}", xValue, yValue);
 
             MobileStation mobileStation = new MobileStation();

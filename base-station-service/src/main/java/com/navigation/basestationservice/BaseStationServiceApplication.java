@@ -31,14 +31,19 @@ public class BaseStationServiceApplication implements CommandLineRunner {
     }
 
     private void loadBaseStationsToDB() {
-        Random random = new Random(100);
+        int min = 1; // Minimum value of range
+        int max = 60; // Maximum value of range
+        int UPPER_BOUND = 60;
+        int LOWER_BOUND = 30;
+
+        Random random = new Random();
         String NAME = "Base Station ";
-        float radius = 45;
+        float radius = (float) Math.floor(((Math.random() * (UPPER_BOUND - LOWER_BOUND + 1)) + LOWER_BOUND));
 
         for (int i = 1; i < 100; i++) {
             String uuid = UUID.randomUUID().toString();
-            float xValue = random.nextFloat(120 );
-            float yValue = random.nextFloat(120);
+            float xValue = (float)Math.floor(Math.random() * (max - min + 1) + min);
+            float yValue = (float)Math.floor(Math.random() * (max - min + 1) + min);
             log.info("XVALUE -> {}, YVALUE -> {}", xValue, yValue);
 
             BaseStation baseStation = new BaseStation();
